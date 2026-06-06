@@ -1,0 +1,15 @@
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+CREATE TABLE IF NOT EXISTS links (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    alias VARCHAR(255) NOT NULL UNIQUE,
+    url TEXT NOT NULL,
+    lifetime INTEGER,
+    is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    is_deactive BOOLEAN NOT NULL DEFAULT FALSE,
+    is_private BOOLEAN NOT NULL DEFAULT FALSE,
+    is_single BOOLEAN NOT NULL DEFAULT FALSE,
+    access_token TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
